@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Portfolio & Client Websites | SPICEN TECHNOLOGIES</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Shelf & Grid Styles */
+    .shelf-container {
+      margin-bottom: 60px;
+    }
+
+    .shelf-header {
+      border-bottom: 2px solid var(--primary-emerald);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .shelf-header h2 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .shelf-header p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin: 4px 0 0 0;
+    }
+
+    /* Cards Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary-emerald);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .client-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-cyan);
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .one-liner {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tech-tag {
+      font-size: 0.75rem;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      padding: 3px 10px;
+      border-radius: 4px;
+      color: var(--text-primary);
+    }
+
+    /* Badges for Tools/Engines */
+    .project-badge {
+      align-self: flex-start;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .badge-engine {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .badge-app {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--primary-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-ece {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    /* Action Buttons */
+    .project-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .action-btn {
+      flex: 1;
+      text-align: center;
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary-emerald);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #059669;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* Download Guide Box */
+    .guide-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 35px;
+      margin-bottom: 60px;
+    }
+
+    .guide-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .step-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .step-num {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+    }
+
+    /* GitHub Hub */
+    .github-hub {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(16, 185, 129, 0.08));
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .github-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #24292e;
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .github-btn:hover {
+      background: #000000;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Moving Ticker Bar -->
+  <div class="top-ticker">
+    <div class="ticker-label">News & Updates</div>
+    <div class="ticker-content">
+      <span>🚀 Official website launched at spicen.in</span>
+      <span>🏛️ SPICEN TECHNOLOGIES operates as a dedicated technology subsidiary under SPICEN GROUP.</span>
+      <span>💡 Building scalable software platforms, custom dashboards, and ECE hardware solutions.</span>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="navbar">
+    <a href="index.html" class="brand-logo">
+    <img src="logo.png" alt="" class="brand-logo-img">
+    <a href="index.html" class="brand-logo">SPICEN<span>TECHNOLOGIES</span></a>
+    
+    <div class="nav-container">
+      <nav>
+        <ul class="nav-links">
+          <li><a href="history.html">History</a></li>
+          <li><a href="members.html">Members</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li><a href="services.html">Other Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div id="live-datetime" class="header-datetime">
+        <span id="live-date">-- --- ----</span>
+        <span class="datetime-divider">|</span>
+        <span id="live-time">00:00:00 AM</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <span class="hero-badge">Engineering Showcase</span>
+    <h1 class="hero-title">Client Websites, Engines & Software Tools</h1>
+    <p class="hero-subtitle">
+      Explore all web platforms built for client enterprises alongside our suite of developer utilities, calculation engines, and ECE hardware tools created by Nehal Agarwal.
+    </p>
+  </section>
+
+  <section class="section">
+    <div style="max-width: 1150px; margin: 0 auto;">
+
+      <!-- SECTION 1: CLIENT WEBSITES SHOWCASE -->
+      <div class="shelf-container">
+        <div class="shelf-header">
+          <div>
+            <h2>🌐 Client Websites & Web Deployments</h2>
+            <p>Custom-engineered platforms tailored for diverse business industries</p>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          
+          <!-- Client Site 1: Tuition Classes -->
+          <div class="project-card">
+            <div>
+              <span class="client-tag">Education Domain</span>
+              <h3 class="card-title">Tuition Classes Portal</h3>
+              <p class="one-liner">Interactive learning portal with course schedules, student registration, batch details, and result inquiry routing.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">HTML5 / CSS3</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Lead Form Pipeline</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://nehalagarwal4695.github.io/rajivclasses" class="action-btn btn-primary">Visit / View Website &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Client Site 2: Cafe & Bistro -->
+          <div class="project-card">
+            <div>
+              <span class="client-tag">Academic Approach</span>
+              <h3 class="card-title">Library & Mood</h3>
+              <p class="one-liner">Modern, aesthetic fintech environment with scripts integration and logical guidance.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Responsive UI</span>
+                <span class="tech-tag">Interactive Menu</span>
+                <span class="tech-tag">Reservation Form</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://nehalagarwal4695.github.io/goswamilibrary" class="action-btn btn-primary">Visit / View Website &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Client Site 3: CA Company -->
+          <div class="project-card">
+            <div>
+              <span class="client-tag">Financial & Legal Domain</span>
+              <h3 class="card-title">Chartered Accountant Firm Platform</h3>
+              <p class="one-liner">Corporate accounting site featuring GST/Tax compliance services, advisory booking, and document audit requests.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Corporate UI</span>
+                <span class="tech-tag">Audit Request Pipeline</span>
+                <span class="tech-tag">Google Sheets Sync</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://nehalagarwal4695.github.io/cagupta" class="action-btn btn-primary">Visit / View Website &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Client Site 4: Online Business / E-Commerce -->
+          <div class="project-card">
+            <div>
+              <span class="client-tag">E-Commerce & Retail</span>
+              <h3 class="card-title">Online Business Showcase</h3>
+              <p class="one-liner">High-converting online store portal showcasing product catalogs, WhatsApp order integration, and customer support.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">E-Commerce Layout</span>
+                <span class="tech-tag">Product Catalog</span>
+                <span class="tech-tag">WhatsApp API</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://nehalagarwal4695.github.io/moonlight-market" class="action-btn btn-primary">Visit / View Website &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Corporate Group Platform -->
+          <div class="project-card">
+            <div>
+              <span class="client-tag">MATRIX MANAGEMENT</span>
+              <h3 class="card-title">DEBT MATRIX ENGINE</h3>
+              <p class="one-liner">A corporate architecture designed to record the flow of debts and dues overtime.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Mathematics Engine</span>
+                <span class="tech-tag">Clocked Enterprise</span>
+                <span class="tech-tag">Live Time Working</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://nehalagarwal4695.github.io/afl" class="action-btn btn-primary">Visit / View Website &rarr;</a>
+            </div>
+          </div>
+
+
+          <!-- Corporate Group Platform -->
+          <div class="project-card">
+            <div>
+              <span class="client-tag">Parent Corporation</span>
+              <h3 class="card-title">SPICEN GROUP Corporate Portal</h3>
+              <p class="one-liner">Central corporate architecture highlighting subsidiary operations, board members, and business ventures.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">SPICEN Framework</span>
+                <span class="tech-tag">Live Clock UI</span>
+                <span class="tech-tag">Multi-Page Routing</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="index.html" class="action-btn btn-primary">Visit / View Website &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- SECTION 2: PROPRIETARY TOOLS & ENGINES SHOWCASE -->
+      <div class="shelf-container">
+        <div class="shelf-header">
+          <div>
+            <h2>⚙️ Systems, Engines & Tools</h2>
+            <p>Proprietary software products engineered by Nehal Agarwal for SPICEN TECHNOLOGIES</p>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- Tool 1: SPICENFORGE -->
+          <div class="project-card">
+            <div>
+              <span class="project-badge badge-engine">Web Compilation Engine</span>
+              <h3 class="card-title">SPICENFORGE</h3>
+              <p class="one-liner">Enterprise layout compilation engine designed to construct corporate web architecture, data bridges, and component pipelines.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">HTML5 / CSS3</span>
+                <span class="tech-tag">JS ES6+</span>
+                <span class="tech-tag">Apps Script</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/nehalagarwal4695/spicenforge" target="_blank" rel="noopener noreferrer" class="action-btn btn-outline">Code</a>
+            </div>
+          </div>
+
+          <!-- Tool 2: COMPONENT ENGINE -->
+          <div class="project-card">
+            <div>
+              <span class="project-badge badge-engine">Modular Logic Framework</span>
+              <h3 class="card-title">COMPONENT ENGINE</h3>
+              <p class="one-liner">Lightweight rendering engine that dynamically injects dynamic UI widgets, ticker displays, and live dateTime displays without lag.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Vanilla JS</span>
+                <span class="tech-tag">DOM Manipulation</span>
+                <span class="tech-tag">CSS Themes</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/nehalagarwal4695/Componentguru" target="_blank" rel="noopener noreferrer" class="action-btn btn-outline">Code</a>
+              <a href="https://Componentguru.streamlit.app" class="action-btn btn-primary">Visit Project</a>
+            </div>
+          </div>
+
+          <!-- Tool 3: CLUTTER WIZARD -->
+          <div class="project-card">
+            <div>
+              <span class="project-badge badge-app">Desktop App</span>
+              <h3 class="card-title">CLUTTER WIZARD</h3>
+              <p class="one-liner">Intelligent desktop utility designed to scan, categorize, and clean up bloated system directories based on extension rules.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Desktop Tool</span>
+                <span class="tech-tag">File System API</span>
+                <span class="tech-tag">Automated Rules</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/nehalagarwal4695/clutterwizard" target="_blank" rel="noopener noreferrer" class="action-btn btn-outline">Code</a>
+            </div>
+          </div>
+
+          <!-- Tool 4: CLIPBOARD BRIDGE -->
+          <div class="project-card">
+            <div>
+              <span class="project-badge badge-app">Cross-Device Utility</span>
+              <h3 class="card-title">CLIPBOARD BRIDGE</h3>
+              <p class="one-liner">Real-time sync tool allowing rapid sharing of text, links, and code snippets instantly across multi-device developer setups.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Network Sockets</span>
+                <span class="tech-tag">Clipboard API</span>
+                <span class="tech-tag">Local Sync</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/nehalagarwal4695/clipboardbridge" target="_blank" rel="noopener noreferrer" class="action-btn btn-outline">Code</a>
+            </div>
+          </div>
+
+          <!-- Tool 5: GHOST SHELF -->
+          <div class="project-card">
+            <div>
+              <span class="project-badge badge-app">Encrypted Vault</span>
+              <h3 class="card-title">GHOST SHELF</h3>
+              <p class="one-liner">Localized encrypted storage shelf designed for holding developer notes, temporary code blocks, and data pipelines securely.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Client Encryption</span>
+                <span class="tech-tag">Secure Storage</span>
+                <span class="tech-tag">Local Vault</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/nehalagarwal4695/ghost_shelf" target="_blank" rel="noopener noreferrer" class="action-btn btn-outline">Code</a>
+            </div>
+          </div>
+
+          <!-- Tool 6: RESISTOCRAFT -->
+          <div class="project-card">
+            <div>
+              <span class="project-badge badge-ece">ECE Calculation Engine</span>
+              <h3 class="card-title">RESISTOCRAFT</h3>
+              <p class="one-liner">Electronics & Communication Engineering tool that decodes resistor band color codes and calculates series/parallel circuits.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">ECE Hardware</span>
+                <span class="tech-tag">Circuit Analysis</span>
+                <span class="tech-tag">Math Engine</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/nehalagarwal4695/resistocraft" target="_blank" rel="noopener noreferrer" class="action-btn btn-outline">Code</a>
+              <a href="https://github.com/nehalagarwal4695/resistocraft/releases/tag/ResistoCraft" class="action-btn btn-primary">Download App</a>
+            </div>
+          </div>
+
+          <!-- Tool 7: SPICEN LOAN ENGINE -->
+          <div class="project-card">
+            <div>
+              <span class="project-badge badge-engine">Fintech Analytics</span>
+              <h3 class="card-title">SPICEN LOAN ENGINE</h3>
+              <p class="one-liner">Multi-lender loan schedule calculation engine built for SPICEN CAPITAL with Broken Period Interest (BPI) analytics and Google Sheets sync.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Fintech Algorithms</span>
+                <span class="tech-tag">BPI Calculation</span>
+                <span class="tech-tag">Google Sheets Sync</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/nehalagarwal4695/afl" target="_blank" rel="noopener noreferrer" class="action-btn btn-outline">Code</a>
+              <a href="https://nehalagarwal4695.github.io/afl" class="action-btn btn-primary">Overview</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- SECTION 3: MINI DOWNLOAD GUIDE -->
+      <div id="download-guide" class="guide-box">
+        <h3 style="font-size: 1.3rem; color: var(--text-primary); border-bottom: 2px solid var(--primary-emerald); padding-bottom: 8px; display: inline-block;">
+          📥 How to Download & Setup Desktop Apps
+        </h3>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 10px;">
+          To download and run standalone tools like <strong>Clutter Wizard</strong>, <strong>Clipboard Bridge</strong>, or <strong>Ghost Shelf</strong>:
+        </p>
+
+        <div class="guide-steps">
+          <div class="step-card">
+            <div class="step-num">STEP 01</div>
+            <h4 style="color: var(--text-primary); font-size: 0.95rem;">Select Application</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Click <strong>Download App</strong> on any software card or navigate directly to our releases page.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">STEP 02</div>
+            <h4 style="color: var(--text-primary); font-size: 0.95rem;">Save Package</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Download the standalone executable (`.exe`) or zip archive straight to your device.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">STEP 03</div>
+            <h4 style="color: var(--text-primary); font-size: 0.95rem;">Launch & Operate</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Run the executable file or open `index.html` in your browser. No complex installation required.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- SECTION 4: GITHUB DIRECT CONNECT HUB -->
+      <div id="github-connect" class="github-hub">
+        <h3 style="color: var(--text-primary); font-size: 1.6rem; margin-bottom: 10px;">Inspect Code Architecture on GitHub</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; max-width: 650px; margin: 0 auto 25px;">
+          Explore public repositories, view full documentation, and see how each web platform, calculation engine, and hardware tool is built by <strong>Nehal Agarwal</strong> for <strong>SPICEN TECHNOLOGIES</strong>.
+        </p>
+
+        <a href="https://github.com/nehalagarwal4695" target="_blank" rel="noopener noreferrer" class="github-btn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>Visit Nehal Agarwal on GitHub</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-col brand-col">
+        <div class="footer-logo">SPICEN<span>TECHNOLOGIES</span></div>
+        <p class="footer-desc">
+          A dedicated subsidiary company of <strong>SPICEN GROUP</strong>. Specializing in high-performance web development and architectural solutions. Expanding into Hardware & Communication Engineering—delivering advanced solutions in chips, microcontrollers, and semiconductors under the ECE domain.
+        </p>
+        <div class="security-badge">
+          <span>🔒 Enterprise Grade Security & Encrypted Infrastructure</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact & Office</h4>
+        <ul class="contact-list">
+          <li><strong>Head Office:</strong><br>Lal Kuan, Ghaziabad - 201002, UP, India</li>
+          <li><strong>Phone:</strong><br><a href="tel:+919667554695">+91 96675 54695</a></li>
+          <li><strong>Inquiries:</strong><br><a href="mailto:info@spicen.in">info@spicen.in</a></li>          
+          <li><strong>Executive Direct:</strong><br><a href="mailto:nehal@spicen.in">nehal@spicen.in</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="history.html">Company History</a></li>
+          <li><a href="members.html">Leadership & Board</a></li>
+          <li><a href="portfolio.html">Project Portfolio</a></li>
+          <li><a href="services.html">ECE & Web Services</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media Networks -->
+      <div class="footer-col">
+        <h4>Connect With Us</h4>
+        <p class="social-text">Follow our social channels for corporate announcements and engineering updates.</p>
+        <div class="social-icons">
+          <!-- Twitter / X -->
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; margin: 30px 0;">
+  <a href="terms.html" style="display: inline-block; padding: 6px 14px; font-size: 0.75rem; font-weight: 600; color: #9ca3af; background: #1f2937; border: 1px solid #374151; border-radius: 6px; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#10b981'; this.style.borderColor='#10b981'" onmouseout="this.style.color='#9ca3af'; this.style.borderColor='#374151'">Terms & Conditions</a>
+  <a href="privacy.html" style="display: inline-block; padding: 6px 14px; font-size: 0.75rem; font-weight: 600; color: #9ca3af; background: #1f2937; border: 1px solid #374151; border-radius: 6px; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#10b981'; this.style.borderColor='#10b981'" onmouseout="this.style.color='#9ca3af'; this.style.borderColor='#374151'">Privacy Policy</a>
+  <a href="security.html" style="display: inline-block; padding: 6px 14px; font-size: 0.75rem; font-weight: 600; color: #9ca3af; background: #1f2937; border: 1px solid #374151; border-radius: 6px; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#10b981'; this.style.borderColor='#10b981'" onmouseout="this.style.color='#9ca3af'; this.style.borderColor='#374151'">Security</a>
+</div>
+      </div>
+    </div>
+
+    <!-- Copyright, Trademark, and Legal Section -->
+    <div class="footer-bottom">
+      <p>&copy; 2026 <strong>SPICEN TECHNOLOGIES</strong>. All Rights Reserved. Designed & Developed By : <a href="https://nehalagarwal4695.github.io/spicentechnologies/" style="text-decoration: none; color: #ff5733">SPICEN TECHNOLOGIES</a></p>
+      <p class="legal-notice">
+        SPICEN TECHNOLOGIES™ is a registered trademark and subsidiary of SPICEN GROUP. All proprietary code, architectures, hardware concepts, and web solutions are protected under international copyright and cybersecurity compliance standards.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Real-Time Date & Time Script -->
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+      const dateOptions = { month: 'short', day: '2-digit', year: 'numeric' };
+      const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+      document.getElementById('live-date').textContent = now.toLocaleDateString('en-US', dateOptions);
+      document.getElementById('live-time').textContent = now.toLocaleTimeString('en-US', timeOptions);
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('spicen-chat-toggle');
+    const chatBox = document.getElementById('spicen-chat-box');
+    const closeBtn = document.getElementById('spicen-chat-close');
+    const chatForm = document.getElementById('spicen-chat-form');
+    const chatInput = document.getElementById('spicen-chat-input');
+    const chatBody = document.getElementById('spicen-chat-body');
+
+    // Toggle Box Visibility
+    toggleBtn.addEventListener('click', () => {
+      chatBox.style.display = (chatBox.style.display === 'flex') ? 'none' : 'flex';
+      if (chatBox.style.display === 'flex') chatInput.focus();
+    });
+
+    closeBtn.addEventListener('click', () => {
+      chatBox.style.display = 'none';
+    });
+
+    // Form Submission
+    chatForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      appendMessage(text, 'user-msg');
+      chatInput.value = '';
+
+      // Generate Response after a small delay
+      setTimeout(() => {
+        const reply = getSpicenBotReply(text);
+        appendMessage(reply, 'bot-msg');
+      }, 400);
+    });
+  });
+
+  function sendQuickPrompt(text) {
+    document.getElementById('spicen-chat-input').value = text;
+    document.getElementById('spicen-chat-form').dispatchEvent(new Event('submit'));
+  }
+
+  function appendMessage(text, className) {
+    const chatBody = document.getElementById('spicen-chat-body');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `chat-msg ${className}`;
+    msgDiv.innerHTML = text;
+    chatBody.appendChild(msgDiv);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  // Knowledge Base Engine
+  function getSpicenBotReply(query) {
+    const q = query.toLowerCase();
+
+    if (q.includes('service') || q.includes('offer') || q.includes('do you do') || q.includes('work')) {
+      return "SPICEN TECHNOLOGIES specializes in:<br>• Custom Enterprise Web Development<br>• Financial & Loan Engines<br>• ECE Hardware/Software Integration<br>• Standalone Desktop & Developer Utilities";
+    }
+    if (q.includes('loan') || q.includes('fmd') || q.includes('calculator') || q.includes('bpi') || q.includes('interest')) {
+      return "Our <strong>SPICEN Loan Engine</strong> tracks multi-lender schedules, calculates Broken Period Interest (BPI), and auto-schedules installments starting directly from your entered First Monthly Date (FMD).";
+    }
+    if (q.includes('who') || q.includes('ceo') || q.includes('owner') || q.includes('founder') || q.includes('leadership')) {
+      return "SPICEN TECHNOLOGIES is led by <strong>Nehal Agarwal</strong> (CEO & Director) alongside <strong>Navneet Garg</strong> (Founder & Chairman) under the parent entity <strong>SPICEN GROUP</strong>.";
+    }
+    if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('reach') || q.includes('address')) {
+      return "📧 Email: <a href='mailto:nehal@spicen.in' style='color:#10b981;'>nehal@spicen.in</a><br>📞 Phone: +91 96675 54695<br>📍 Location: Lal Kuan, Ghaziabad, UP, India.";
+    }
+    if (q.includes('app') || q.includes('desktop') || q.includes('utility') || q.includes('clutter') || q.includes('ghost')) {
+      return "We build native desktop utilities like <em>Clutter Wizard</em>, <em>Clipboard Bridge</em>, and <em>Ghost Shelf</em> designed to boost local developer productivity.";
+    }
+    if (q.includes('security') || q.includes('privacy') || q.includes('terms') || q.includes('safe')) {
+      return "We operate under strict data protection protocols with isolated Google Sheets bridges and TLS 1.3 encryption. You can read our <a href='privacy.html' style='color:#10b981;'>Privacy Policy</a> and <a href='security.html' style='color:#10b981;'>Security Architecture</a> pages.";
+    }
+    if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('greetings')) {
+      return "Hello! How can I help you regarding SPICEN TECHNOLOGIES today?";
+    }
+
+    return "Thank you for asking! For custom project quotes or direct assistance, feel free to reach CEO Nehal Agarwal directly at <strong>nehal@spicen.in</strong> or submit a request on our <a href='contact.html' style='color:#10b981;'>Contact Page</a>.";
+  }
+  </script>
+
+  <!-- SPICEN TECHNOLOGIES Floating AI Chatbot Widget -->
+<div id="spicen-chat-widget">
+  <!-- Floating Toggle Button -->
+  <button id="spicen-chat-toggle" title="Chat with Spicen AI Assistant">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  </button>
+
+  <!-- Chat Window Box -->
+  <div id="spicen-chat-box">
+    <!-- Header -->
+    <div class="spicen-chat-header">
+      <div class="spicen-chat-title">
+        <div class="spicen-chat-avatar">ST</div>
+        <div>
+          <h4>Spicen AI Assistant</h4>
+          <span>● Online | SPICEN TECH</span>
+        </div>
+      </div>
+      <button id="spicen-chat-close">&times;</button>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="spicen-chat-body">
+      <div class="chat-msg bot-msg">
+        Hello! 👋 Welcome to <strong>SPICEN TECHNOLOGIES</strong>. How can I assist you today?
+      </div>
+      <div class="chat-msg bot-msg">
+        Ask me about our web development, financial loan tools, ECE integrations, desktop apps, or company details!
+      </div>
+    </div>
+
+    <!-- Quick Prompt Chips -->
+    <div class="spicen-chat-suggestions">
+      <button onclick="sendQuickPrompt('What services does Spicen Tech offer?')">Services</button>
+      <button onclick="sendQuickPrompt('Tell me about the Loan Engine')">Loan Engine</button>
+      <button onclick="sendQuickPrompt('How do I contact Nehal Agarwal?')">Contact</button>
+    </div>
+
+    <!-- Input Form -->
+    <form id="spicen-chat-form">
+      <input type="text" id="spicen-chat-input" placeholder="Type your question..." autocomplete="off" required />
+      <button type="submit" id="spicen-chat-send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
